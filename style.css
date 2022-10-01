@@ -9,6 +9,7 @@ body {
 #player-container {
   justify-content: space-around;
   width: 600px;
+  margin-top: 10px;
 }
 
 .player-one,
@@ -19,15 +20,36 @@ body {
   height: 30px;
   width: 265px;
   margin: 15px;
-  background-color: burlywood;
+  /* background-color: burlywood; */
   justify-content: center;
   text-align: center;
+  border: none;
+  color: azure;
 }
+
+.light-up {
+  visibility: hidden;
+}
+
+.blue {
+  background-color: rgba(0, 0, 255, 0.7);
+  box-shadow: 0 0 40px 10px blue; /* in order: x offset, y offset, blur size, spread size, color */
+  /* blur size and spread size are optional (they default to 0) */
+}
+
+.red {
+  background-color: rgba(255, 0, 0, 0.7);
+  box-shadow: 0 0 40px 10px red;
+  /* in order: x offset, y offset, blur size, spread size, color */
+  /* blur size and spread size are optional (they default to 0) */
+}
+
 .game-container {
   width: 600px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 .tile {

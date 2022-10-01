@@ -19,10 +19,11 @@ boxes.forEach((tile) => {
     //change color red change color blue
     if (e.target.style.backgroundColor != `blue`) {
       makeRed(e);
-    } else if (e.target.style.backgroundColor != `red`) {
+    }
+    if (e.target.style.backgroundColor != `red`) {
       makeBlue(e);
     } else {
-      e.target.style.backgroundColor = `slateGray`;
+      e.target.style.backgroundColor = `lightGray`;
     }
   });
 });
