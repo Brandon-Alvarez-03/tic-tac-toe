@@ -1,0 +1,42 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#player-container {
+  justify-content: space-around;
+  width: 600px;
+}
+
+.player-one,
+.player-two {
+  display: inline-flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 30px;
+  width: 265px;
+  margin: 15px;
+  background-color: burlywood;
+  justify-content: center;
+  text-align: center;
+}
+.game-container {
+  width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tile {
+  height: 190px;
+  width: 190px;
+  margin: 5px;
+  background-color: lightgray;
+}
+
+#reset {
+  width: 520px;
+}
