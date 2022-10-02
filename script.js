@@ -135,7 +135,7 @@ function checkWinner(playerSet) {
       gameOver != true &&
       winCase == false
     ) {
-      // alert("It's a Tie!");
+      alert("It's a Tie!");
       console.log("Tie");
       gameOver = true;
       break;
