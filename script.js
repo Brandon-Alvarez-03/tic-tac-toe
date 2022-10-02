@@ -1,7 +1,9 @@
 //make queries for each important item
+let gameOver = false;
 
 let player1Set = new Set();
 let player2Set = new Set();
+let compareSet = new Set();
 console.log(player1Set, player2Set);
 
 let p1Turn = document.querySelector(".player-one");
@@ -34,32 +36,41 @@ boxes.forEach((tile) => {
     if (
       e.target.style.backgroundColor != "red" &&
       currentPlayer == "playerTwo" &&
-      e.target.style.backgroundColor != "lightblue"
+      e.target.style.backgroundColor != "lightblue" &&
+      gameOver != true
     ) {
       makeRed(e);
+      // this adds the number of the tile the player selected to a set
       player2Set.add(e.target.dataset.number);
       console.log(`Player 2: `, player2Set);
-      currentPlayer = "playerOne";
-      if (
-        e.target.backgroundColor != "red" &&
-        e.target.backgroundColor != "lightblue"
-      ) {
-        changeVisibility();
+      checkWinner(player2Set);
+      if (gameOver == false) {
+        currentPlayer = "playerOne";
+        if (
+          e.target.backgroundColor != "red" &&
+          e.target.backgroundColor != "lightblue"
+        ) {
+          setTimeout(changeVisibility, 60);
+        }
       }
     } else if (
       e.target.style.backgroundColor != "red" &&
       currentPlayer == "playerOne" &&
-      e.target.style.backgroundColor != "red"
+      e.target.style.backgroundColor != "lightblue" &&
+      gameOver != true
     ) {
       makeBlue(e);
       player1Set.add(e.target.dataset.number);
       console.log(`Player 1: `, player1Set);
-      currentPlayer = "playerTwo";
-      if (
-        e.target.backgroundColor != "red" &&
-        e.target.backgroundColor != "lightblue"
-      ) {
-        changeVisibility();
+      checkWinner(player1Set);
+      if (gameOver == false) {
+        currentPlayer = "playerTwo";
+        if (
+          e.target.backgroundColor != "red" &&
+          e.target.backgroundColor != "lightblue"
+        ) {
+          setTimeout(changeVisibility, 60);
+        }
       }
     }
   });
@@ -88,7 +99,6 @@ function createCheck() {
   let set6 = new Set(["3", "6", "9"]);
   let set7 = new Set(["1", "5", "9"]);
   let set8 = new Set(["3", "5", "7"]);
-  let compareSet = new Set();
   function addToSet(set) {
     compareSet.add(set);
   }
@@ -103,12 +113,23 @@ function createCheck() {
   console.log(compareSet);
 }
 
-// function to populate player combo
-function AddPlayerChoice() {}
-
 //function to compare player combos with winning combos and display winner with an alert
 
-//if you click a color that has already been filled do not swap player turn`
+function checkWinner(playerSet) {
+  //if playerset is in one of the other sets they win
+  //how to compare two sets to see if they are equal
+  //ys would be the playerset
+  //xs would be one of the winner sets, we just have to iterate through the winner sets
+  const eqSet = (xs, ys) =>
+    xs.size === ys.size && [...xs].every((x) => ys.has(x));
+
+  for (const subset of compareSet) {
+    if (eqSet(subset, playerSet) === true) {
+      setTimeout(runGameOver, 50);
+      gameOver = true;
+    }
+  }
+}
 
 //make reset button clear the board and clear colors from the players names
 resetBtn.addEventListener("click", () => {
@@ -126,4 +147,17 @@ resetBtn.addEventListener("click", () => {
     player2Set.delete(item);
   }
   console.log(player1Set, player2Set);
+  gameOver = false;
 });
+
+function runGameOver() {
+  if (currentPlayer == "playerOne") {
+    alert("Game Over! Player One Wins!");
+  } else {
+    alert("Game Over! Player Two Wins!");
+  }
+}
+// could have blank everything until game start is made available, honestly leave entire game blank with a visibility hidden
+//have a start button in center and when clicked it changed visibility of all and display none's itself
+
+// Could alert a draw case in the end of the winner case
