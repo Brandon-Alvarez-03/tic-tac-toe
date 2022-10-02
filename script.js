@@ -32,7 +32,7 @@ boxes.forEach((tile) => {
   tile.addEventListener("click", (e) => {
     //change color red change color blue
     if (
-      // e.target.style.backgroundColor == `lightgray` &&
+      e.target.style.backgroundColor != "red" &&
       currentPlayer == "playerTwo" &&
       e.target.style.backgroundColor != "lightblue"
     ) {
@@ -40,9 +40,14 @@ boxes.forEach((tile) => {
       player2Set.add(e.target.dataset.number);
       console.log(`Player 2: `, player2Set);
       currentPlayer = "playerOne";
-      changeVisibility();
+      if (
+        e.target.backgroundColor != "red" &&
+        e.target.backgroundColor != "lightblue"
+      ) {
+        changeVisibility();
+      }
     } else if (
-      // e.target.style.backgroundColor == `lightgray` &&
+      e.target.style.backgroundColor != "red" &&
       currentPlayer == "playerOne" &&
       e.target.style.backgroundColor != "red"
     ) {
@@ -50,7 +55,12 @@ boxes.forEach((tile) => {
       player1Set.add(e.target.dataset.number);
       console.log(`Player 1: `, player1Set);
       currentPlayer = "playerTwo";
-      changeVisibility();
+      if (
+        e.target.backgroundColor != "red" &&
+        e.target.backgroundColor != "lightblue"
+      ) {
+        changeVisibility();
+      }
     }
   });
 });
@@ -98,6 +108,8 @@ function AddPlayerChoice() {}
 
 //function to compare player combos with winning combos and display winner with an alert
 
+//if you click a color that has already been filled do not swap player turn`
+
 //make reset button clear the board and clear colors from the players names
 resetBtn.addEventListener("click", () => {
   boxes.forEach((tile) => {
@@ -115,5 +127,3 @@ resetBtn.addEventListener("click", () => {
   }
   console.log(player1Set, player2Set);
 });
-
-// still have to prevent player from being able to select over a block that already has a color
