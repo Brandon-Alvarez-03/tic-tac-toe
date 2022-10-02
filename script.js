@@ -33,7 +33,8 @@ boxes.forEach((tile) => {
     //change color red change color blue
     if (
       // e.target.style.backgroundColor == `lightgray` &&
-      currentPlayer == "playerTwo"
+      currentPlayer == "playerTwo" &&
+      e.target.style.backgroundColor != "lightblue"
     ) {
       makeRed(e);
       player2Set.add(e.target.dataset.number);
@@ -42,7 +43,8 @@ boxes.forEach((tile) => {
       changeVisibility();
     } else if (
       // e.target.style.backgroundColor == `lightgray` &&
-      currentPlayer == "playerOne"
+      currentPlayer == "playerOne" &&
+      e.target.style.backgroundColor != "red"
     ) {
       makeBlue(e);
       player1Set.add(e.target.dataset.number);
