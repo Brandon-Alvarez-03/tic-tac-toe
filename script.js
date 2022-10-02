@@ -1,7 +1,7 @@
 //make queries for each important item
 
 let p1Turn = document.querySelector(".player-one");
-let p2Turn = document.querySelector(".player-one");
+let p2Turn = document.querySelector(".player-two");
 
 let boxes = document.querySelectorAll(".tile");
 let resetBtn = document.querySelector("#reset");
@@ -9,6 +9,7 @@ let playerOptions = ["playerOne", "playerTwo"];
 let currentPlayer =
   playerOptions[Math.floor(Math.random() * playerOptions.length)];
 console.log(currentPlayer);
+changeVisibility();
 
 console.log(boxes);
 // create functions for change red and one for change blue
@@ -31,18 +32,29 @@ boxes.forEach((tile) => {
     ) {
       makeRed(e);
       currentPlayer = "playerOne";
+      changeVisibility();
     } else if (
       // e.target.style.backgroundColor == `lightgray` &&
       currentPlayer == "playerOne"
     ) {
       makeBlue(e);
       currentPlayer = "playerTwo";
+      changeVisibility();
     }
   });
 });
 
 // make player in control visible when it's their turn
-
+function changeVisibility() {
+  if (currentPlayer == "playerOne") {
+    p2Turn.style.visibility = `hidden`;
+    p1Turn.style.visibility = `visible`;
+  }
+  if (currentPlayer == "playerTwo") {
+    p1Turn.style.visibility = `hidden`;
+    p2Turn.style.visibility = `visible`;
+  }
+}
 // Establish win conditions and display win alert
 
 //make reset button clear the board and clear colors from the players names
@@ -50,4 +62,8 @@ resetBtn.addEventListener("click", () => {
   boxes.forEach((tile) => {
     tile.style.backgroundColor = `lightgray`;
   });
+  currentPlayer =
+    playerOptions[Math.floor(Math.random() * playerOptions.length)];
+  changeVisibility();
+  console.log(currentPlayer);
 });
