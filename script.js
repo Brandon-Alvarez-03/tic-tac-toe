@@ -1,6 +1,6 @@
 //make queries for each important item
 let gameOver = false;
-let winCase = false;
+let tieCase = false;
 let player1Set = new Set();
 let player2Set = new Set();
 let compareSet = new Set();
@@ -53,6 +53,14 @@ boxes.forEach((tile) => {
           setTimeout(changeVisibility, 60);
         }
       }
+      if (
+        player1Set.size + player2Set.size == 9 &&
+        gameOver != true &&
+        tieCase == true
+      ) {
+        console.log("tie");
+        setTimeout(alert("Tie"), 2000);
+      }
     } else if (
       e.target.style.backgroundColor != "red" &&
       currentPlayer == "playerOne" &&
@@ -71,6 +79,14 @@ boxes.forEach((tile) => {
         ) {
           setTimeout(changeVisibility, 60);
         }
+      }
+      if (
+        player1Set.size + player2Set.size == 9 &&
+        gameOver != true &&
+        tieCase == true
+      ) {
+        console.log("tie");
+        setTimeout(alert("Tie"), 2000);
       }
     }
   });
@@ -125,20 +141,11 @@ function checkWinner(playerSet) {
   for (const subset of compareSet) {
     if (eqSet(subset, playerSet) === true) {
       console.log("done");
+      gameOver = true;
       setTimeout(runGameOver, 50);
-      gameOver = true;
-      winCase = true;
       break;
-    }
-    if (
-      player1Set.size + player2Set.size == 9 &&
-      gameOver != true &&
-      winCase == false
-    ) {
-      alert("It's a Tie!");
-      console.log("Tie");
-      gameOver = true;
-      break;
+    } else if (player1Set.size + player2Set.size == 9) {
+      tieCase = true;
     }
   }
 }
@@ -175,6 +182,5 @@ function reset() {
 
   gameOver = false;
 }
-
 // could have blank everything until game start is made available, honestly leave entire game blank with a visibility hidden
 //have a start button in center and when clicked it changed visibility of all and display none's itself
