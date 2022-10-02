@@ -59,3 +59,30 @@ body {
 #reset {
   width: 520px;
 }
+
+@media only screen and (max-width: 600px) {
+  body {
+    max-width: 100%;
+  }
+
+  #player-container {
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .game-container {
+    max-width: 360px;
+    margin-bottom: 10px;
+  }
+
+  .tile {
+    max-width: 90px;
+    max-height: 90px;
+  }
+
+  #reset {
+    max-width: 100%;
+  }
+}
