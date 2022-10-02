@@ -123,6 +123,11 @@ function checkWinner(playerSet) {
   const eqSet = (xs, ys) =>
     xs.size === ys.size && [...xs].every((x) => ys.has(x));
 
+  if (player1Set.size + player2Set.size == 9) {
+    alert("It's a Tie!");
+    gameOver = true;
+  }
+
   for (const subset of compareSet) {
     if (eqSet(subset, playerSet) === true) {
       setTimeout(runGameOver, 50);
@@ -136,18 +141,7 @@ resetBtn.addEventListener("click", () => {
   boxes.forEach((tile) => {
     tile.style.backgroundColor = `lightgray`;
   });
-  currentPlayer =
-    playerOptions[Math.floor(Math.random() * playerOptions.length)];
-  changeVisibility();
-  console.log(currentPlayer);
-  for (const item of player1Set) {
-    player1Set.delete(item);
-  }
-  for (const item of player2Set) {
-    player2Set.delete(item);
-  }
-  console.log(player1Set, player2Set);
-  gameOver = false;
+  reset();
 });
 
 function runGameOver() {
@@ -157,7 +151,23 @@ function runGameOver() {
     alert("Game Over! Player Two Wins!");
   }
 }
+
+function reset() {
+  currentPlayer =
+    playerOptions[Math.floor(Math.random() * playerOptions.length)];
+  changeVisibility();
+  console.log(currentPlayer);
+  console.log(player1Set.size, player2Set.size);
+  for (const item of player1Set) {
+    player1Set.delete(item);
+  }
+  for (const item of player2Set) {
+    player2Set.delete(item);
+  }
+  console.log(player1Set, player2Set);
+
+  gameOver = false;
+}
+
 // could have blank everything until game start is made available, honestly leave entire game blank with a visibility hidden
 //have a start button in center and when clicked it changed visibility of all and display none's itself
-
-// Could alert a draw case in the end of the winner case
