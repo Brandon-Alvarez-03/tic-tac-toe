@@ -1,5 +1,9 @@
 //make queries for each important item
 
+let player1Set = new Set();
+let player2Set = new Set();
+console.log(player1Set, player2Set);
+
 let p1Turn = document.querySelector(".player-one");
 let p2Turn = document.querySelector(".player-two");
 
@@ -32,6 +36,8 @@ boxes.forEach((tile) => {
       currentPlayer == "playerTwo"
     ) {
       makeRed(e);
+      player2Set.add(e.target.dataset.number);
+      console.log(`Player 2: `, player2Set);
       currentPlayer = "playerOne";
       changeVisibility();
     } else if (
@@ -39,6 +45,8 @@ boxes.forEach((tile) => {
       currentPlayer == "playerOne"
     ) {
       makeBlue(e);
+      player1Set.add(e.target.dataset.number);
+      console.log(`Player 1: `, player1Set);
       currentPlayer = "playerTwo";
       changeVisibility();
     }
@@ -60,14 +68,14 @@ function changeVisibility() {
 
 //create set of winning combos to compare win conditions against
 function createCheck() {
-  let set1 = new Set([1, 2, 3]);
-  let set2 = new Set([4, 5, 6]);
-  let set3 = new Set([7, 8, 9]);
-  let set4 = new Set([1, 4, 7]);
-  let set5 = new Set([2, 5, 8]);
-  let set6 = new Set([3, 6, 9]);
-  let set7 = new Set([1, 5, 9]);
-  let set8 = new Set([3, 5, 7]);
+  let set1 = new Set(["1", "2", "3"]);
+  let set2 = new Set(["4", "5", "6"]);
+  let set3 = new Set(["7", "8", "9"]);
+  let set4 = new Set(["1", "4", "7"]);
+  let set5 = new Set(["2", "5", "8"]);
+  let set6 = new Set(["3", "6", "9"]);
+  let set7 = new Set(["1", "5", "9"]);
+  let set8 = new Set(["3", "5", "7"]);
   let compareSet = new Set();
   function addToSet(set) {
     compareSet.add(set);
@@ -97,4 +105,13 @@ resetBtn.addEventListener("click", () => {
     playerOptions[Math.floor(Math.random() * playerOptions.length)];
   changeVisibility();
   console.log(currentPlayer);
+  for (const item of player1Set) {
+    player1Set.delete(item);
+  }
+  for (const item of player2Set) {
+    player2Set.delete(item);
+  }
+  console.log(player1Set, player2Set);
 });
+
+// still have to prevent player from being able to select over a block that already has a color
