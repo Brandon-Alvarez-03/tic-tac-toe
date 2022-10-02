@@ -11,7 +11,7 @@
 
 - Vanilla HTML, CSS, JavaScript
 - Conditional Logic and Functions
-- Utilized flexbox and understanding of CSS Box Model to create game structure and create a responsive design
+- Utilized flexbox and understanding of CSS Box Model to create game structure and implement responsive design
 - Event Listeners/Handlers, forEach and for-in iteration through arrays and sets
 - Sets, set value comparison, and iteration through sets were used to evaluate player combinations against a set of sets including possible winning combinations
 
