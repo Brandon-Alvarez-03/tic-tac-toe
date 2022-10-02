@@ -1,6 +1,6 @@
 //make queries for each important item
 let gameOver = false;
-
+let winCase = false;
 let player1Set = new Set();
 let player2Set = new Set();
 let compareSet = new Set();
@@ -120,18 +120,25 @@ function checkWinner(playerSet) {
   //how to compare two sets to see if they are equal
   //ys would be the playerset
   //xs would be one of the winner sets, we just have to iterate through the winner sets
-  const eqSet = (xs, ys) =>
-    xs.size === ys.size && [...xs].every((x) => ys.has(x));
-
-  if (player1Set.size + player2Set.size == 9) {
-    alert("It's a Tie!");
-    gameOver = true;
-  }
+  const eqSet = (xs, ys) => [...xs].every((x) => ys.has(x));
 
   for (const subset of compareSet) {
     if (eqSet(subset, playerSet) === true) {
+      console.log("done");
       setTimeout(runGameOver, 50);
       gameOver = true;
+      winCase = true;
+      break;
+    }
+    if (
+      player1Set.size + player2Set.size == 9 &&
+      gameOver != true &&
+      winCase == false
+    ) {
+      // alert("It's a Tie!");
+      console.log("Tie");
+      gameOver = true;
+      break;
     }
   }
 }
