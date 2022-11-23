@@ -80,14 +80,14 @@ boxes.forEach((tile) => {
           setTimeout(changeVisibility, 60);
         }
       }
-      if (
-        player1Set.size + player2Set.size == 9 &&
-        gameOver != true &&
-        tieCase == true
-      ) {
-        console.log("tie");
-        setTimeout(alert("Tie"), 2000);
-      }
+      // if (
+      //   player1Set.size + player2Set.size == 9 &&
+      //   gameOver != true &&
+      //   tieCase == true
+      // ) {
+      //   console.log("tie");
+      //   setTimeout(alert("Tie"), 2000);
+      // }
     }
   });
 });
@@ -144,7 +144,7 @@ function checkWinner(playerSet) {
       gameOver = true;
       setTimeout(runGameOver, 50);
       break;
-    } else if (player1Set.size + player2Set.size == 9) {
+    } else if (player1Set.size + player2Set.size == 8) {
       tieCase = true;
     }
   }
